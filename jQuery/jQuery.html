@@ -1,0 +1,184 @@
+<!-- <!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
+  </head>
+  <body>
+    <div>
+      <ul>
+        <li>Racecars</li>
+        <li>Lasers</li>
+        <li>Aeroplanes</li>
+      </ul>
+
+      <p>Something else</p>
+    </div>
+
+  <script>
+    const $ul = $("ul");
+    $ul.children().attr("style", "background-color: purple");
+    $ul.parent().attr("style", "background-color: green");
+    $ul.siblings().attr("style", "color: blue");
+  </script>
+</body>
+</html> -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
+  <body>
+    <div>
+      <ul></ul>
+    </div>
+
+    <script>
+      const coolThings = [
+        "racecars",
+        "lasers",
+        "aeroplanes"
+      ];
+
+      let i = 0;
+      window.setInterval( () => {
+        const $ul = $("ul");
+        if ($ul.children().length == 10) {
+          // $ul.children() returns a jQuery object containing all the
+          // children; we then call `#remove`, which implicitly iterates
+          // over the set, removing each of them.
+          $ul.children().remove();
+        }
+
+        const li = document.createElement("li");
+        li.textContent = coolThings[i];
+        // jQuery#append is just like HTMLElement#appendChild
+        $ul.append(li);
+
+        i = (i + 1) % 3;
+      }, 1000);
+    </script>
+  </body>
+</html> -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
+  </head>
+  <body>
+
+    <button>Toggle Annoying Handler</button>
+
+    <p>Try to hover over me!</p>
+
+    <script>
+      let enabled = false;
+
+      function annoy() {
+        alert("YOU ARE HOVERING OVER ME!");
+      }
+
+      $("button").on("click", () => {
+        if (!enabled) {
+          $("p").on("mouseover", annoy);
+          enabled = true;
+        } else {
+          // remove listener
+          $("p").off("mouseover", annoy);
+          enabled = false;
+        }
+      });
+    </script>
+  </body>
+</html> -->
+
+
+<!-- <!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
+  </head>
+  <body>
+
+    <ul>
+      <li>Racecars</li>
+      <li>Lasers</li>
+      <li>Aeroplanes</li>
+    </ul>
+
+    <script>
+      var $listItems = $("li");
+      $listItems.on("mouseover", event => {
+        const currentTarget = event.currentTarget;
+        const $currentTarget = $(currentTarget);
+        alert($currentTarget.text());
+      })
+    </script>
+  </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
+  </head>
+  <body>
+
+    <ul id="dogs"></ul>
+
+    <script>
+      const DOGS = {
+        101: {
+          id: 101,
+          name: "Sable",
+          genus: "Husky Huskius"
+        },
+
+        234: {
+          id: 234,
+          name: "Blixa",
+          genus: "Corgi Corgiorum"
+        }
+      };
+
+      // Fill $dogsUl with list items; one per dog.
+      const dogsUl = $("ul#dogs");
+      Object.keys(DOGS).forEach( id => {
+        const dog = DOGS[id];
+
+        const dogLi = $("<li class='dog'></li>");
+        dogLi.text(dog.name + " -- " + dog.genus);
+
+        // store the dog's id in a **data-* attribute**
+        dogLi.data("id", dog.id);
+
+        dogsUl.append(dogLi);
+      });
+
+      // Install click handlers on the li.dog elements.
+      $("li.dog").on("click", event => {
+        const dogLi = $(event.currentTarget);
+
+        // pull dog id out of the DOM to identify the dog.
+        const dogId = dogLi.data("id");
+        const dog = DOGS[dogId];
+
+        alert(dog.name + " loves you!");
+      });
+    </script>
+  </body>
+</html>
