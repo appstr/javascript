@@ -6,7 +6,7 @@ function binarySearch(arr, target, idx=0){
   let mid = Math.floor(full_len / 2);
   if(arr[mid] === target){
     // return `INDEX of ${target} is: ${idx+mid}`;
-    return idx + mid;c
+    return idx + mid;
   }else if(target > arr[mid]){
     let right = arr.slice(mid + 1, full_len);
     idx += (full_len - right.length);
